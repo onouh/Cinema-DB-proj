@@ -1,9 +1,5 @@
 CREATE DATABASE [Cinema Ticket Booking]
  CONTAINMENT = NONE
- ON  PRIMARY 
-( NAME = N'Cinema Ticket Booking', FILENAME = N'/var/opt/mssql/data/Cinema Ticket Booking.mdf' , SIZE = 8192KB , FILEGROWTH = 65536KB )
- LOG ON 
-( NAME = N'Cinema Ticket Booking_log', FILENAME = N'/var/opt/mssql/data/Cinema Ticket Booking_log.ldf' , SIZE = 8192KB , FILEGROWTH = 65536KB )
  COLLATE SQL_Latin1_General_CP1_CI_AS
  WITH LEDGER = OFF
 GO
