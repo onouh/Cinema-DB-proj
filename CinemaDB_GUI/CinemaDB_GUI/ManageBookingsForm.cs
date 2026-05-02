@@ -118,7 +118,7 @@ namespace CinemaDB_GUI
                 txtId.Text = row.Cells["booking_id"].Value.ToString();
                 txtCustomerId.Text = row.Cells["customer_id"].Value.ToString();
                 txtStatus.Text = row.Cells["booking_status"].Value.ToString();
-                
+
                 if (DateTime.TryParse(row.Cells["booking_date"].Value?.ToString(), out DateTime date))
                     txtBookingDate.Text = date.ToString("yyyy-MM-dd");
                 else
@@ -129,6 +129,11 @@ namespace CinemaDB_GUI
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void dgvData_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

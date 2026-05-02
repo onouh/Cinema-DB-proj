@@ -41,5 +41,10 @@ namespace CinemaDB_GUI
         {
             this.Close();
         }
+
+        private void CustomerTicketsForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

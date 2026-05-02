@@ -65,6 +65,13 @@ INSERT INTO SHOWTIME (movie_id,hall_no,cinema_id,slot,date) VALUES
 (3,1,3,'Evening','2026-04-25'),
 (4,1,4,'Night','2026-04-25');
 
+INSERT INTO SHOWTIME (movie_id,hall_no,cinema_id,slot,date) VALUES
+(1,1,1,'Morning','2026-05-03'),
+(2,1,2,'Afternoon','2026-05-04'),
+(3,1,3,'Evening','2026-05-05'),
+(4,1,4,'Night','2026-05-06');
+
+
 -- BOOKING
 INSERT INTO BOOKING (customer_id,booking_date,booking_status) VALUES
 (1,'2026-04-22','confirmed'),

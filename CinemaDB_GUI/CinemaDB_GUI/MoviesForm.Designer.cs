@@ -38,7 +38,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Showcard Gothic", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(332, 32);
+            label1.Location = new Point(113, 44);
             label1.Name = "label1";
             label1.Size = new Size(207, 60);
             label1.TabIndex = 0;
@@ -47,7 +47,7 @@
             // 
             // btn_back
             // 
-            btn_back.Location = new Point(113, 499);
+            btn_back.Location = new Point(113, 619);
             btn_back.Name = "btn_back";
             btn_back.Size = new Size(150, 46);
             btn_back.TabIndex = 2;
@@ -61,7 +61,7 @@
             dgv_Movies.Location = new Point(113, 134);
             dgv_Movies.Name = "dgv_Movies";
             dgv_Movies.RowHeadersWidth = 82;
-            dgv_Movies.Size = new Size(667, 327);
+            dgv_Movies.Size = new Size(1232, 442);
             dgv_Movies.TabIndex = 3;
             dgv_Movies.CellContentClick += dgv_Movies_CellContentClick;
             // 
@@ -69,7 +69,7 @@
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(870, 631);
+            ClientSize = new Size(1441, 799);
             Controls.Add(dgv_Movies);
             Controls.Add(btn_back);
             Controls.Add(label1);

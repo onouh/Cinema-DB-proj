@@ -30,9 +30,10 @@ namespace CinemaDB_GUI
             // 
             labelTitle.AutoSize = true;
             labelTitle.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold);
-            labelTitle.Location = new Point(40, 20);
+            labelTitle.Location = new Point(65, 32);
+            labelTitle.Margin = new Padding(5, 0, 5, 0);
             labelTitle.Name = "labelTitle";
-            labelTitle.Size = new Size(270, 46);
+            labelTitle.Size = new Size(424, 72);
             labelTitle.TabIndex = 0;
             labelTitle.Text = "My Tickets View";
             // 
@@ -40,28 +41,31 @@ namespace CinemaDB_GUI
             // 
             labelCustomerId.AutoSize = true;
             labelCustomerId.Font = new Font("Segoe UI", 11F);
-            labelCustomerId.Location = new Point(40, 90);
+            labelCustomerId.Location = new Point(65, 144);
+            labelCustomerId.Margin = new Padding(5, 0, 5, 0);
             labelCustomerId.Name = "labelCustomerId";
-            labelCustomerId.Size = new Size(117, 25);
+            labelCustomerId.Size = new Size(191, 41);
             labelCustomerId.TabIndex = 1;
             labelCustomerId.Text = "Customer ID:";
             // 
             // textBoxCustomerId
             // 
-            textBoxCustomerId.Location = new Point(170, 90);
+            textBoxCustomerId.Location = new Point(276, 144);
+            textBoxCustomerId.Margin = new Padding(5, 5, 5, 5);
             textBoxCustomerId.Name = "textBoxCustomerId";
-            textBoxCustomerId.Size = new Size(150, 27);
+            textBoxCustomerId.Size = new Size(241, 39);
             textBoxCustomerId.TabIndex = 2;
             // 
             // btnLoadTickets
             // 
             btnLoadTickets.BackColor = Color.MediumSeaGreen;
-            btnLoadTickets.ForeColor = Color.White;
             btnLoadTickets.FlatStyle = FlatStyle.Flat;
             btnLoadTickets.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnLoadTickets.Location = new Point(340, 80);
+            btnLoadTickets.ForeColor = Color.White;
+            btnLoadTickets.Location = new Point(552, 128);
+            btnLoadTickets.Margin = new Padding(5, 5, 5, 5);
             btnLoadTickets.Name = "btnLoadTickets";
-            btnLoadTickets.Size = new Size(120, 45);
+            btnLoadTickets.Size = new Size(195, 72);
             btnLoadTickets.TabIndex = 3;
             btnLoadTickets.Text = "Load Tickets";
             btnLoadTickets.UseVisualStyleBackColor = false;
@@ -69,24 +73,26 @@ namespace CinemaDB_GUI
             // 
             // dgvTickets
             // 
-            dgvTickets.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTickets.Location = new Point(40, 150);
-            dgvTickets.Name = "dgvTickets";
-            dgvTickets.RowHeadersWidth = 51;
-            dgvTickets.Size = new Size(800, 350);
-            dgvTickets.TabIndex = 4;
-            dgvTickets.ReadOnly = true;
             dgvTickets.AllowUserToAddRows = false;
             dgvTickets.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvTickets.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvTickets.Location = new Point(65, 240);
+            dgvTickets.Margin = new Padding(5, 5, 5, 5);
+            dgvTickets.Name = "dgvTickets";
+            dgvTickets.ReadOnly = true;
+            dgvTickets.RowHeadersWidth = 51;
+            dgvTickets.Size = new Size(1300, 560);
+            dgvTickets.TabIndex = 4;
             // 
             // btnBack
             // 
             btnBack.BackColor = Color.LightGray;
             btnBack.FlatStyle = FlatStyle.Flat;
             btnBack.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnBack.Location = new Point(40, 520);
+            btnBack.Location = new Point(65, 832);
+            btnBack.Margin = new Padding(5, 5, 5, 5);
             btnBack.Name = "btnBack";
-            btnBack.Size = new Size(100, 40);
+            btnBack.Size = new Size(162, 64);
             btnBack.TabIndex = 5;
             btnBack.Text = "Back";
             btnBack.UseVisualStyleBackColor = false;
@@ -94,19 +100,21 @@ namespace CinemaDB_GUI
             // 
             // CustomerTicketsForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
-            ClientSize = new Size(880, 580);
+            ClientSize = new Size(1430, 928);
             Controls.Add(btnBack);
             Controls.Add(dgvTickets);
             Controls.Add(btnLoadTickets);
             Controls.Add(textBoxCustomerId);
             Controls.Add(labelCustomerId);
             Controls.Add(labelTitle);
+            Margin = new Padding(5, 5, 5, 5);
             Name = "CustomerTicketsForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Customer Tickets";
+            Load += CustomerTicketsForm_Load;
             ((System.ComponentModel.ISupportInitialize)dgvTickets).EndInit();
             ResumeLayout(false);
             PerformLayout();
