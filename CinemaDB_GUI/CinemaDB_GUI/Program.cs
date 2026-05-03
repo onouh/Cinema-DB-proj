@@ -18,8 +18,8 @@ namespace CinemaDB_GUI
             // If you are using .NET 6 or later, Visual Studio might auto-generate the line below instead:
             // ApplicationConfiguration.Initialize();
 
-            // Launch the main dashboard (Form1)
-            Application.Run(new Form1());
+            // Launch the main dashboard (CustomerDashboard)
+            Application.Run(new CustomerDashboard());
         }
     }
 }
