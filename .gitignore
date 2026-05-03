@@ -1,0 +1,26 @@
+# Visual Studio / .NET
+[Oo]bj/
+[Bb]in/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# .NET Core
+project.lock.json
+project.assets.json
+*.nuget.props
+*.nuget.targets
