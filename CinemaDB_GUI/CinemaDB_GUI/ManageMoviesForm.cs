@@ -13,7 +13,6 @@ namespace CinemaDB_GUI
         {
             InitializeComponent();
 
-            // Wire up event handlers
             btnAdd.Click += BtnAdd_Click;
             btnUpdate.Click += BtnUpdate_Click;
             btnDelete.Click += BtnDelete_Click;
@@ -45,9 +44,9 @@ namespace CinemaDB_GUI
             if (dgvAdminMovies.SelectedRows.Count > 0)
             {
                 DataGridViewRow row = dgvAdminMovies.SelectedRows[0];
-                txtTitle.Text = row.Cells["title"].Value.ToString();
+                txtTitle.Text = row.Cells["title"].Value?.ToString() ?? "";
                 txtDesc.Text = row.Cells["description"].Value?.ToString() ?? "";
-                txtDuration.Text = row.Cells["duration_min"].Value.ToString();
+                txtDuration.Text = row.Cells["duration_min"].Value?.ToString() ?? "";
                 txtLang.Text = row.Cells["language"].Value?.ToString() ?? "";
             }
         }
@@ -58,13 +57,14 @@ namespace CinemaDB_GUI
             {
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
-                    SqlCommand cmd = new SqlCommand("sp_InsertMovie", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(
+                        @"INSERT INTO MOVIE (title, description, duration_min, language)
+                          VALUES (@title, @description, @duration_min, @language)", conn);
                     cmd.Parameters.AddWithValue("@title", txtTitle.Text);
                     cmd.Parameters.AddWithValue("@description", txtDesc.Text);
                     cmd.Parameters.AddWithValue("@duration_min", Convert.ToInt32(txtDuration.Text));
                     cmd.Parameters.AddWithValue("@language", txtLang.Text);
-                    conn.Open();
                     cmd.ExecuteNonQuery();
                 }
                 MessageBox.Show("Movie added successfully!");
@@ -85,14 +85,17 @@ namespace CinemaDB_GUI
             {
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
-                    SqlCommand cmd = new SqlCommand("sp_UpdateMovie", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(
+                        @"UPDATE MOVIE
+                          SET title = @title, description = @description,
+                              duration_min = @duration_min, language = @language
+                          WHERE movie_id = @movie_id", conn);
                     cmd.Parameters.AddWithValue("@movie_id", movieId);
                     cmd.Parameters.AddWithValue("@title", txtTitle.Text);
                     cmd.Parameters.AddWithValue("@description", txtDesc.Text);
                     cmd.Parameters.AddWithValue("@duration_min", Convert.ToInt32(txtDuration.Text));
                     cmd.Parameters.AddWithValue("@language", txtLang.Text);
-                    conn.Open();
                     cmd.ExecuteNonQuery();
                 }
                 MessageBox.Show("Movie updated successfully!");
@@ -113,10 +116,10 @@ namespace CinemaDB_GUI
             {
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
-                    SqlCommand cmd = new SqlCommand("sp_DeleteMovie", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@movie_id", movieId);
                     conn.Open();
+                    SqlCommand cmd = new SqlCommand(
+                        "DELETE FROM MOVIE WHERE movie_id = @movie_id", conn);
+                    cmd.Parameters.AddWithValue("@movie_id", movieId);
                     cmd.ExecuteNonQuery();
                 }
                 MessageBox.Show("Movie deleted successfully!");

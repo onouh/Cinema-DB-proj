@@ -13,7 +13,6 @@ namespace CinemaDB_GUI
         {
             InitializeComponent();
 
-            // Wire up event handlers
             btnUpdate.Click += BtnUpdate_Click;
             btnDelete.Click += BtnDelete_Click;
             dgv.SelectionChanged += Dgv_SelectionChanged;
@@ -27,7 +26,8 @@ namespace CinemaDB_GUI
             {
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
-                    SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM BOOKING ORDER BY booking_date DESC", conn);
+                    SqlDataAdapter da = new SqlDataAdapter(
+                        "SELECT * FROM BOOKING ORDER BY booking_date DESC", conn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
                     dgv.DataSource = dt;
@@ -43,7 +43,7 @@ namespace CinemaDB_GUI
         {
             if (dgv.SelectedRows.Count > 0)
             {
-                txtStatus.Text = dgv.SelectedRows[0].Cells["booking_status"].Value.ToString();
+                txtStatus.Text = dgv.SelectedRows[0].Cells["booking_status"].Value?.ToString() ?? "";
             }
         }
 
@@ -56,11 +56,12 @@ namespace CinemaDB_GUI
             {
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
-                    SqlCommand cmd = new SqlCommand("sp_UpdateBookingStatus", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(
+                        @"UPDATE BOOKING SET booking_status = @booking_status
+                          WHERE booking_id = @booking_id", conn);
                     cmd.Parameters.AddWithValue("@booking_id", bookingId);
                     cmd.Parameters.AddWithValue("@booking_status", txtStatus.Text);
-                    conn.Open();
                     cmd.ExecuteNonQuery();
                 }
                 MessageBox.Show("Booking status updated successfully!");
@@ -81,10 +82,10 @@ namespace CinemaDB_GUI
             {
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
-                    SqlCommand cmd = new SqlCommand("sp_DeleteBooking", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@booking_id", bookingId);
                     conn.Open();
+                    SqlCommand cmd = new SqlCommand(
+                        "DELETE FROM BOOKING WHERE booking_id = @booking_id", conn);
+                    cmd.Parameters.AddWithValue("@booking_id", bookingId);
                     cmd.ExecuteNonQuery();
                 }
                 MessageBox.Show("Booking deleted successfully!");

@@ -13,7 +13,6 @@ namespace CinemaDB_GUI
         {
             InitializeComponent();
 
-            // Wire up event handlers
             btnAdd.Click += BtnAdd_Click;
             btnUpdate.Click += BtnUpdate_Click;
             btnDelete.Click += BtnDelete_Click;
@@ -45,11 +44,11 @@ namespace CinemaDB_GUI
             if (dgv.SelectedRows.Count > 0)
             {
                 DataGridViewRow row = dgv.SelectedRows[0];
-                txtFirstName.Text = row.Cells["first_name"].Value.ToString();
-                txtLastName.Text = row.Cells["last_name"].Value.ToString();
-                txtEmail.Text = row.Cells["email"].Value.ToString();
+                txtFirstName.Text = row.Cells["first_name"].Value?.ToString() ?? "";
+                txtLastName.Text = row.Cells["last_name"].Value?.ToString() ?? "";
+                txtEmail.Text = row.Cells["email"].Value?.ToString() ?? "";
                 txtPhone.Text = row.Cells["phone"].Value?.ToString() ?? "";
-                txtPassword.Text = row.Cells["password"].Value.ToString();
+                txtPassword.Text = row.Cells["password"].Value?.ToString() ?? "";
             }
         }
 
@@ -59,14 +58,15 @@ namespace CinemaDB_GUI
             {
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
-                    SqlCommand cmd = new SqlCommand("sp_InsertCustomer", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(
+                        @"INSERT INTO CUSTOMER (first_name, last_name, email, phone, password)
+                          VALUES (@first_name, @last_name, @email, @phone, @password)", conn);
                     cmd.Parameters.AddWithValue("@first_name", txtFirstName.Text);
                     cmd.Parameters.AddWithValue("@last_name", txtLastName.Text);
                     cmd.Parameters.AddWithValue("@email", txtEmail.Text);
                     cmd.Parameters.AddWithValue("@phone", txtPhone.Text);
                     cmd.Parameters.AddWithValue("@password", txtPassword.Text);
-                    conn.Open();
                     cmd.ExecuteNonQuery();
                 }
                 MessageBox.Show("Customer added successfully!");
@@ -87,15 +87,18 @@ namespace CinemaDB_GUI
             {
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
-                    SqlCommand cmd = new SqlCommand("sp_UpdateCustomer", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(
+                        @"UPDATE CUSTOMER
+                          SET first_name = @first_name, last_name = @last_name,
+                              email = @email, phone = @phone, password = @password
+                          WHERE customer_id = @customer_id", conn);
                     cmd.Parameters.AddWithValue("@customer_id", customerId);
                     cmd.Parameters.AddWithValue("@first_name", txtFirstName.Text);
                     cmd.Parameters.AddWithValue("@last_name", txtLastName.Text);
                     cmd.Parameters.AddWithValue("@email", txtEmail.Text);
                     cmd.Parameters.AddWithValue("@phone", txtPhone.Text);
                     cmd.Parameters.AddWithValue("@password", txtPassword.Text);
-                    conn.Open();
                     cmd.ExecuteNonQuery();
                 }
                 MessageBox.Show("Customer updated successfully!");
@@ -116,10 +119,10 @@ namespace CinemaDB_GUI
             {
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
-                    SqlCommand cmd = new SqlCommand("sp_DeleteCustomer", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@customer_id", customerId);
                     conn.Open();
+                    SqlCommand cmd = new SqlCommand(
+                        "DELETE FROM CUSTOMER WHERE customer_id = @customer_id", conn);
+                    cmd.Parameters.AddWithValue("@customer_id", customerId);
                     cmd.ExecuteNonQuery();
                 }
                 MessageBox.Show("Customer deleted successfully!");
