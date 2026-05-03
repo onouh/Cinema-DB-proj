@@ -56,6 +56,7 @@ namespace CinemaDB_GUI
             // 
             this.btnUpdate.BackColor = System.Drawing.Color.LightGoldenrodYellow;
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnUpdate.Location = new System.Drawing.Point(300, 68);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(120, 29);
@@ -67,6 +68,7 @@ namespace CinemaDB_GUI
             // 
             this.btnDelete.BackColor = System.Drawing.Color.LightCoral;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnDelete.Location = new System.Drawing.Point(440, 68);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(120, 29);
@@ -100,7 +102,8 @@ namespace CinemaDB_GUI
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.lblTitle);
             this.Name = "ManageBookingsForm";
-            this.Text = "Master Booking Control";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Manage Bookings";
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

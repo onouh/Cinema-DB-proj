@@ -13,25 +13,100 @@ namespace CinemaDB_GUI
         {
             InitializeComponent();
 
-            // Wire up event handlers
             btnLoad.Click += BtnLoad_Click;
             btnConfirm.Click += (s, e) => ExecuteBookingAction("sp_ConfirmPayment");
             btnCancel.Click += (s, e) => ExecuteBookingAction("sp_CancelBooking");
+            cbViewMode.SelectedIndexChanged += CbViewMode_Changed;
         }
 
         private void BtnLoad_Click(object sender, EventArgs e)
         {
-            if (!int.TryParse(txtCustomerId.Text, out int customerId)) return;
-
-            using (SqlConnection conn = new SqlConnection(connString))
+            if (!int.TryParse(txtCustomerId.Text, out int customerId))
             {
-                SqlCommand cmd = new SqlCommand("sp_GetMyBookings", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@CustomerID", customerId);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dgvBookings.DataSource = dt;
+                MessageBox.Show("Enter a valid Customer ID.");
+                return;
+            }
+
+            try
+            {
+                // Load bookings
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_GetMyBookings", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@CustomerID", customerId);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dgvBookings.DataSource = dt;
+                }
+
+                // Load stats
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    conn.Open();
+                    var cmd1 = new SqlCommand(
+                        "SELECT dbo.fn_GetCustomerTotalSpent(@C)", conn);
+                    cmd1.Parameters.AddWithValue("@C", customerId);
+                    object r1 = cmd1.ExecuteScalar();
+                    decimal spent = r1 != null && r1 != DBNull.Value ? Convert.ToDecimal(r1) : 0;
+                    lblSpentValue.Text = spent.ToString("C");
+
+                    var cmd2 = new SqlCommand(
+                        "SELECT dbo.fn_CountCustomerBookings(@C)", conn);
+                    cmd2.Parameters.AddWithValue("@C", customerId);
+                    object r2 = cmd2.ExecuteScalar();
+                    int count = r2 != null && r2 != DBNull.Value ? Convert.ToInt32(r2) : 0;
+                    lblCountValue.Text = count.ToString();
+                }
+
+                cbViewMode.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void CbViewMode_Changed(object sender, EventArgs e)
+        {
+            if (cbViewMode.SelectedItem == null ||
+                !int.TryParse(txtCustomerId.Text, out int customerId)) return;
+
+            string mode = cbViewMode.SelectedItem.ToString();
+
+            try
+            {
+                if (mode == "Full Details")
+                {
+                    using var conn = new SqlConnection(connString);
+                    conn.Open();
+                    var cmd = new SqlCommand(
+                        "SELECT * FROM dbo.fn_GetCustomerBookingDetails(@C)", conn);
+                    cmd.Parameters.AddWithValue("@C", customerId);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dgvBookings.DataSource = dt;
+                }
+                else
+                {
+                    // Confirmed, Cancelled, or All
+                    using var conn = new SqlConnection(connString);
+                    conn.Open();
+                    var cmd = new SqlCommand(
+                        "SELECT * FROM dbo.fn_GetCustomerBookingSummary(@C, @T)", conn);
+                    cmd.Parameters.AddWithValue("@C", customerId);
+                    cmd.Parameters.AddWithValue("@T", mode);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dgvBookings.DataSource = dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
 
@@ -65,7 +140,7 @@ namespace CinemaDB_GUI
                     cmd.ExecuteNonQuery();
 
                     bool success = Convert.ToBoolean(outSuccess.Value);
-                    string errorMsg = outError.Value.ToString();
+                    string errorMsg = outError.Value?.ToString() ?? "";
 
                     if (success)
                     {

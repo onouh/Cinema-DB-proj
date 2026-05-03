@@ -14,42 +14,77 @@ namespace CinemaDB_GUI
             InitializeComponent();
 
             // Wire up event handlers
-            btnAdd.Click += (s, e) => ExecuteQuery("INSERT INTO SHOWTIME (movie_id, cinema_id, hall_no, date, slot) VALUES (@mov, @cin, @hall, @date, @slot)");
-
-            btnDelete.Click += (s, e) =>
-            {
-                if (dgv.SelectedRows.Count > 0) ExecuteQuery("DELETE FROM SHOWTIME WHERE showtime_id=@id", Convert.ToInt32(dgv.SelectedRows[0].Cells["showtime_id"].Value));
-            };
+            btnAdd.Click += BtnAdd_Click;
+            btnDelete.Click += BtnDelete_Click;
 
             RefreshGrid();
         }
 
         private void RefreshGrid()
         {
-            using (SqlConnection conn = new SqlConnection(connString))
+            try
             {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM SHOWTIME", conn);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dgv.DataSource = dt;
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM SHOWTIME", conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dgv.DataSource = dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading showtimes: " + ex.Message);
             }
         }
 
-        private void ExecuteQuery(string query, int? id = null)
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(connString))
+            try
             {
-                SqlCommand cmd = new SqlCommand(query, conn);
-                if (id.HasValue) cmd.Parameters.AddWithValue("@id", id.Value);
-                cmd.Parameters.AddWithValue("@mov", Convert.ToInt32(txtMovieId.Text));
-                cmd.Parameters.AddWithValue("@cin", Convert.ToInt32(txtCinemaId.Text));
-                cmd.Parameters.AddWithValue("@hall", Convert.ToInt32(txtHall.Text));
-                cmd.Parameters.AddWithValue("@date", dtpDate.Value.Date);
-                cmd.Parameters.AddWithValue("@slot", txtSlot.Text);
-                conn.Open();
-                cmd.ExecuteNonQuery();
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_InsertShowtime", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@movie_id", Convert.ToInt32(txtMovieId.Text));
+                    cmd.Parameters.AddWithValue("@hall_no", Convert.ToInt32(txtHall.Text));
+                    cmd.Parameters.AddWithValue("@cinema_id", Convert.ToInt32(txtCinemaId.Text));
+                    cmd.Parameters.AddWithValue("@slot", txtSlot.Text);
+                    cmd.Parameters.AddWithValue("@date", dtpDate.Value.Date);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                MessageBox.Show("Showtime added successfully!");
+                RefreshGrid();
             }
-            RefreshGrid();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error adding showtime: " + ex.Message);
+            }
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgv.SelectedRows.Count == 0) return;
+            int showtimeId = Convert.ToInt32(dgv.SelectedRows[0].Cells["showtime_id"].Value);
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_DeleteShowtime", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@showtime_id", showtimeId);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                MessageBox.Show("Showtime deleted successfully!");
+                RefreshGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error deleting showtime: " + ex.Message);
+            }
         }
     }
 }

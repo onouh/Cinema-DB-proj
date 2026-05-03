@@ -14,46 +14,86 @@ namespace CinemaDB_GUI
             InitializeComponent();
 
             // Wire up event handlers
-            btnUpdate.Click += (s, e) =>
-            {
-                if (dgv.SelectedRows.Count > 0) ExecuteQuery("UPDATE BOOKING SET booking_status=@stat WHERE booking_id=@id", Convert.ToInt32(dgv.SelectedRows[0].Cells["booking_id"].Value));
-            };
-
-            btnDelete.Click += (s, e) =>
-            {
-                if (dgv.SelectedRows.Count > 0) ExecuteQuery("DELETE FROM BOOKING WHERE booking_id=@id", Convert.ToInt32(dgv.SelectedRows[0].Cells["booking_id"].Value));
-            };
-
-            dgv.SelectionChanged += (s, e) =>
-            {
-                if (dgv.SelectedRows.Count > 0) txtStatus.Text = dgv.SelectedRows[0].Cells["booking_status"].Value.ToString();
-            };
+            btnUpdate.Click += BtnUpdate_Click;
+            btnDelete.Click += BtnDelete_Click;
+            dgv.SelectionChanged += Dgv_SelectionChanged;
 
             RefreshGrid();
         }
 
         private void RefreshGrid()
         {
-            using (SqlConnection conn = new SqlConnection(connString))
+            try
             {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM BOOKING ORDER BY booking_date DESC", conn);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dgv.DataSource = dt;
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM BOOKING ORDER BY booking_date DESC", conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dgv.DataSource = dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading bookings: " + ex.Message);
             }
         }
 
-        private void ExecuteQuery(string query, int id)
+        private void Dgv_SelectionChanged(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(connString))
+            if (dgv.SelectedRows.Count > 0)
             {
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@id", id);
-                cmd.Parameters.AddWithValue("@stat", txtStatus.Text);
-                conn.Open();
-                cmd.ExecuteNonQuery();
+                txtStatus.Text = dgv.SelectedRows[0].Cells["booking_status"].Value.ToString();
             }
-            RefreshGrid();
+        }
+
+        private void BtnUpdate_Click(object sender, EventArgs e)
+        {
+            if (dgv.SelectedRows.Count == 0) return;
+            int bookingId = Convert.ToInt32(dgv.SelectedRows[0].Cells["booking_id"].Value);
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_UpdateBookingStatus", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@booking_id", bookingId);
+                    cmd.Parameters.AddWithValue("@booking_status", txtStatus.Text);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                MessageBox.Show("Booking status updated successfully!");
+                RefreshGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error updating booking: " + ex.Message);
+            }
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgv.SelectedRows.Count == 0) return;
+            int bookingId = Convert.ToInt32(dgv.SelectedRows[0].Cells["booking_id"].Value);
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_DeleteBooking", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@booking_id", bookingId);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                MessageBox.Show("Booking deleted successfully!");
+                RefreshGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error deleting booking: " + ex.Message);
+            }
         }
     }
 }

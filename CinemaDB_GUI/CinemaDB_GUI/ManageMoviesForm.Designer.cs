@@ -111,6 +111,7 @@ namespace CinemaDB_GUI
             // 
             this.btnAdd.BackColor = System.Drawing.Color.MediumAquamarine;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnAdd.Location = new System.Drawing.Point(600, 65);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(94, 29);
@@ -122,6 +123,7 @@ namespace CinemaDB_GUI
             // 
             this.btnUpdate.BackColor = System.Drawing.Color.LightGoldenrodYellow;
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnUpdate.Location = new System.Drawing.Point(600, 105);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(130, 29);
@@ -133,6 +135,7 @@ namespace CinemaDB_GUI
             // 
             this.btnDelete.BackColor = System.Drawing.Color.LightCoral;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnDelete.Location = new System.Drawing.Point(710, 65);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(120, 29);
@@ -142,6 +145,7 @@ namespace CinemaDB_GUI
             // 
             // dgvAdminMovies
             // 
+            this.dgvAdminMovies.AllowUserToAddRows = false;
             this.dgvAdminMovies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAdminMovies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAdminMovies.Location = new System.Drawing.Point(20, 160);
@@ -173,7 +177,8 @@ namespace CinemaDB_GUI
             this.Controls.Add(this.lblMovieTitle);
             this.Controls.Add(this.lblTitle);
             this.Name = "ManageMoviesForm";
-            this.Text = "Manage Movies (Admin)";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Manage Movies";
             ((System.ComponentModel.ISupportInitialize)(this.dgvAdminMovies)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -7,8 +7,7 @@ namespace CinemaDB_GUI
 {
     public partial class AvailableSeatsForm : Form
     {
-        // Ideally, change this to DatabaseConfig.ConnectionString as previously discussed!
-        private string connString = "Server=YOUR_SERVER_NAME;Database=CinemaDB;Integrated Security=True;TrustServerCertificate=True;";
+        private string connString = DatabaseConfig.ConnectionString;
 
         public AvailableSeatsForm()
         {

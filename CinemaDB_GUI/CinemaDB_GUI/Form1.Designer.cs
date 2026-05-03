@@ -29,6 +29,7 @@ namespace CinemaDB_GUI
             this.btn_ManageCinemas = new System.Windows.Forms.Button();
             this.btn_ManageShowtimes = new System.Windows.Forms.Button();
             this.btn_ManageBookings = new System.Windows.Forms.Button();
+            this.btn_BookTicket = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelTitle
@@ -63,6 +64,7 @@ namespace CinemaDB_GUI
             this.btn_ViewMovies.TabIndex = 2;
             this.btn_ViewMovies.Text = "View Available Movies";
             this.btn_ViewMovies.UseVisualStyleBackColor = false;
+            this.btn_ViewMovies.Click += new System.EventHandler(this.btn_ViewMovies_Click);
             // 
             // btn_ViewMyTickets
             // 
@@ -75,6 +77,7 @@ namespace CinemaDB_GUI
             this.btn_ViewMyTickets.TabIndex = 3;
             this.btn_ViewMyTickets.Text = "View My Tickets";
             this.btn_ViewMyTickets.UseVisualStyleBackColor = false;
+            this.btn_ViewMyTickets.Click += new System.EventHandler(this.btn_ViewMyTickets_Click);
             // 
             // btn_ViewSeats
             // 
@@ -87,6 +90,7 @@ namespace CinemaDB_GUI
             this.btn_ViewSeats.TabIndex = 4;
             this.btn_ViewSeats.Text = "View Available Seats";
             this.btn_ViewSeats.UseVisualStyleBackColor = false;
+            this.btn_ViewSeats.Click += new System.EventHandler(this.btn_ViewSeats_Click);
             // 
             // btn_CustomerManageBookings
             // 
@@ -99,6 +103,20 @@ namespace CinemaDB_GUI
             this.btn_CustomerManageBookings.TabIndex = 11;
             this.btn_CustomerManageBookings.Text = "Manage My Bookings";
             this.btn_CustomerManageBookings.UseVisualStyleBackColor = false;
+            this.btn_CustomerManageBookings.Click += new System.EventHandler(this.btn_CustomerManageBookings_Click);
+            // 
+            // btn_BookTicket
+            // 
+            this.btn_BookTicket.BackColor = System.Drawing.Color.LightGoldenrodYellow;
+            this.btn_BookTicket.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_BookTicket.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btn_BookTicket.Location = new System.Drawing.Point(100, 450);
+            this.btn_BookTicket.Name = "btn_BookTicket";
+            this.btn_BookTicket.Size = new System.Drawing.Size(250, 55);
+            this.btn_BookTicket.TabIndex = 12;
+            this.btn_BookTicket.Text = "\u2709  Book a Ticket";
+            this.btn_BookTicket.UseVisualStyleBackColor = false;
+            this.btn_BookTicket.Click += new System.EventHandler(this.btn_BookTicket_Click);
             // 
             // labelAdmin
             // 
@@ -122,6 +140,7 @@ namespace CinemaDB_GUI
             this.btn_ManageCustomers.TabIndex = 6;
             this.btn_ManageCustomers.Text = "Manage Customers";
             this.btn_ManageCustomers.UseVisualStyleBackColor = false;
+            this.btn_ManageCustomers.Click += new System.EventHandler(this.btn_ManageCustomers_Click);
             // 
             // btn_ManageMovies
             // 
@@ -134,6 +153,7 @@ namespace CinemaDB_GUI
             this.btn_ManageMovies.TabIndex = 7;
             this.btn_ManageMovies.Text = "Manage Movies";
             this.btn_ManageMovies.UseVisualStyleBackColor = false;
+            this.btn_ManageMovies.Click += new System.EventHandler(this.btn_ManageMovies_Click);
             // 
             // btn_ManageCinemas
             // 
@@ -146,6 +166,7 @@ namespace CinemaDB_GUI
             this.btn_ManageCinemas.TabIndex = 8;
             this.btn_ManageCinemas.Text = "Manage Cinemas";
             this.btn_ManageCinemas.UseVisualStyleBackColor = false;
+            this.btn_ManageCinemas.Click += new System.EventHandler(this.btn_ManageCinemas_Click);
             // 
             // btn_ManageShowtimes
             // 
@@ -158,6 +179,7 @@ namespace CinemaDB_GUI
             this.btn_ManageShowtimes.TabIndex = 9;
             this.btn_ManageShowtimes.Text = "Manage Showtimes";
             this.btn_ManageShowtimes.UseVisualStyleBackColor = false;
+            this.btn_ManageShowtimes.Click += new System.EventHandler(this.btn_ManageShowtimes_Click);
             // 
             // btn_ManageBookings
             // 
@@ -170,13 +192,15 @@ namespace CinemaDB_GUI
             this.btn_ManageBookings.TabIndex = 10;
             this.btn_ManageBookings.Text = "Manage Bookings";
             this.btn_ManageBookings.UseVisualStyleBackColor = false;
+            this.btn_ManageBookings.Click += new System.EventHandler(this.btn_ManageBookings_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(840, 550);
+            this.ClientSize = new System.Drawing.Size(840, 580);
+            this.Controls.Add(this.btn_BookTicket);
             this.Controls.Add(this.btn_ManageBookings);
             this.Controls.Add(this.btn_ManageShowtimes);
             this.Controls.Add(this.btn_ManageCinemas);
@@ -210,5 +234,6 @@ namespace CinemaDB_GUI
         private System.Windows.Forms.Button btn_ManageCinemas;
         private System.Windows.Forms.Button btn_ManageShowtimes;
         private System.Windows.Forms.Button btn_ManageBookings;
+        private System.Windows.Forms.Button btn_BookTicket;
     }
 }

@@ -86,6 +86,7 @@ namespace CinemaDB_GUI
             this.Controls.Add(this.lblShowtimeId);
             this.Controls.Add(this.lblTitle);
             this.Name = "AvailableSeatsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Available Seats Check";
             ((System.ComponentModel.ISupportInitialize)(this.dgvSeats)).EndInit();
             this.ResumeLayout(false);

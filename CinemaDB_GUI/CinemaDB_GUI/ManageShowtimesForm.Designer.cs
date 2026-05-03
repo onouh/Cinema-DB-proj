@@ -129,6 +129,7 @@ namespace CinemaDB_GUI
             // 
             this.btnAdd.BackColor = System.Drawing.Color.MediumAquamarine;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnAdd.Location = new System.Drawing.Point(600, 68);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(94, 29);
@@ -140,6 +141,7 @@ namespace CinemaDB_GUI
             // 
             this.btnDelete.BackColor = System.Drawing.Color.LightCoral;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnDelete.Location = new System.Drawing.Point(600, 105);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(94, 29);
@@ -181,6 +183,7 @@ namespace CinemaDB_GUI
             this.Controls.Add(this.lblMovieId);
             this.Controls.Add(this.lblTitle);
             this.Name = "ManageShowtimesForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage Showtimes";
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);

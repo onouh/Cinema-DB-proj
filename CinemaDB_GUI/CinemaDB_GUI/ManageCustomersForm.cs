@@ -14,50 +14,121 @@ namespace CinemaDB_GUI
             InitializeComponent();
 
             // Wire up event handlers
-            btnAdd.Click += (s, e) => ExecuteQuery("INSERT INTO CUSTOMER (name, email, phone) VALUES (@name, @email, @phone)");
-
-            btnDelete.Click += (s, e) =>
-            {
-                if (dgv.SelectedRows.Count > 0) ExecuteQuery("DELETE FROM CUSTOMER WHERE customer_id=@id", Convert.ToInt32(dgv.SelectedRows[0].Cells["customer_id"].Value));
-            };
-
-            dgv.SelectionChanged += (s, e) =>
-            {
-                if (dgv.SelectedRows.Count > 0)
-                {
-                    txtName.Text = dgv.SelectedRows[0].Cells["name"].Value.ToString();
-                    txtEmail.Text = dgv.SelectedRows[0].Cells["email"].Value.ToString();
-                    txtPhone.Text = dgv.SelectedRows[0].Cells["phone"].Value.ToString();
-                }
-            };
+            btnAdd.Click += BtnAdd_Click;
+            btnUpdate.Click += BtnUpdate_Click;
+            btnDelete.Click += BtnDelete_Click;
+            dgv.SelectionChanged += Dgv_SelectionChanged;
 
             RefreshGrid();
         }
 
         private void RefreshGrid()
         {
-            using (SqlConnection conn = new SqlConnection(connString))
+            try
             {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM CUSTOMER", conn);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dgv.DataSource = dt;
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM CUSTOMER", conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dgv.DataSource = dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading customers: " + ex.Message);
             }
         }
 
-        private void ExecuteQuery(string query, int? id = null)
+        private void Dgv_SelectionChanged(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(connString))
+            if (dgv.SelectedRows.Count > 0)
             {
-                SqlCommand cmd = new SqlCommand(query, conn);
-                if (id.HasValue) cmd.Parameters.AddWithValue("@id", id.Value);
-                cmd.Parameters.AddWithValue("@name", txtName.Text);
-                cmd.Parameters.AddWithValue("@email", txtEmail.Text);
-                cmd.Parameters.AddWithValue("@phone", txtPhone.Text);
-                conn.Open();
-                cmd.ExecuteNonQuery();
+                DataGridViewRow row = dgv.SelectedRows[0];
+                txtFirstName.Text = row.Cells["first_name"].Value.ToString();
+                txtLastName.Text = row.Cells["last_name"].Value.ToString();
+                txtEmail.Text = row.Cells["email"].Value.ToString();
+                txtPhone.Text = row.Cells["phone"].Value?.ToString() ?? "";
+                txtPassword.Text = row.Cells["password"].Value.ToString();
             }
-            RefreshGrid();
+        }
+
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_InsertCustomer", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@first_name", txtFirstName.Text);
+                    cmd.Parameters.AddWithValue("@last_name", txtLastName.Text);
+                    cmd.Parameters.AddWithValue("@email", txtEmail.Text);
+                    cmd.Parameters.AddWithValue("@phone", txtPhone.Text);
+                    cmd.Parameters.AddWithValue("@password", txtPassword.Text);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                MessageBox.Show("Customer added successfully!");
+                RefreshGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error adding customer: " + ex.Message);
+            }
+        }
+
+        private void BtnUpdate_Click(object sender, EventArgs e)
+        {
+            if (dgv.SelectedRows.Count == 0) return;
+            int customerId = Convert.ToInt32(dgv.SelectedRows[0].Cells["customer_id"].Value);
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_UpdateCustomer", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@customer_id", customerId);
+                    cmd.Parameters.AddWithValue("@first_name", txtFirstName.Text);
+                    cmd.Parameters.AddWithValue("@last_name", txtLastName.Text);
+                    cmd.Parameters.AddWithValue("@email", txtEmail.Text);
+                    cmd.Parameters.AddWithValue("@phone", txtPhone.Text);
+                    cmd.Parameters.AddWithValue("@password", txtPassword.Text);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                MessageBox.Show("Customer updated successfully!");
+                RefreshGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error updating customer: " + ex.Message);
+            }
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgv.SelectedRows.Count == 0) return;
+            int customerId = Convert.ToInt32(dgv.SelectedRows[0].Cells["customer_id"].Value);
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_DeleteCustomer", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@customer_id", customerId);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                MessageBox.Show("Customer deleted successfully!");
+                RefreshGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error deleting customer: " + ex.Message);
+            }
         }
     }
 }

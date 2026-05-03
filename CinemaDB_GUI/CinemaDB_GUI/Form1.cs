@@ -15,6 +15,7 @@ namespace CinemaDB_GUI
         private void btn_ViewMyTickets_Click(object sender, EventArgs e) => new CustomerTicketsForm().Show();
         private void btn_ViewSeats_Click(object sender, EventArgs e) => new AvailableSeatsForm().Show();
         private void btn_CustomerManageBookings_Click(object sender, EventArgs e) => new CustomerManageBookingsForm().Show();
+        private void btn_BookTicket_Click(object sender, EventArgs e) => new MakeBookingForm().Show();
 
         // ── Admin Section ──
         private void btn_ManageCustomers_Click(object sender, EventArgs e) => new ManageCustomersForm().Show();

@@ -86,6 +86,7 @@ namespace CinemaDB_GUI
             this.Controls.Add(this.lblCustomerId);
             this.Controls.Add(this.lblTitle);
             this.Name = "CustomerTicketsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "My Tickets";
             ((System.ComponentModel.ISupportInitialize)(this.dgvTickets)).EndInit();
             this.ResumeLayout(false);
