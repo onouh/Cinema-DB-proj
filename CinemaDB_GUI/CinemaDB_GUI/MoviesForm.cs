@@ -26,11 +26,13 @@ namespace CinemaDB_GUI
 
         private void LoadData()
         {
-            SqlConnection con = new SqlConnection("Data Source=localhost;Initial Catalog=CinemaDB;Integrated Security=SSPI;TrustServerCertificate=True");
-            con.Open();
+            using (SqlConnection con = new SqlConnection("Data Source=localhost;Initial Catalog=CinemaDB;Integrated Security=SSPI;TrustServerCertificate=True"))
+            {
+                con.Open();
 
-            SqlCommand cmd = new SqlCommand("sp_ViewAvailableMovies", con);
-            cmd.CommandType = CommandType.StoredProcedure;
+                using (SqlCommand cmd = new SqlCommand("sp_ViewAvailableMovies", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
 
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
