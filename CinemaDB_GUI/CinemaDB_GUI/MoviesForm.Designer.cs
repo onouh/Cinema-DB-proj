@@ -1,4 +1,4 @@
-﻿namespace CinemaDB_GUI
+namespace CinemaDB_GUI
 {
     partial class MoviesForm
     {
@@ -31,6 +31,7 @@
             label1 = new Label();
             btn_back = new Button();
             dgv_Movies = new DataGridView();
+            btn_refresh = new Button();
             ((System.ComponentModel.ISupportInitialize)dgv_Movies).BeginInit();
             SuspendLayout();
             // 
@@ -65,11 +66,22 @@
             dgv_Movies.TabIndex = 3;
             dgv_Movies.CellContentClick += dgv_Movies_CellContentClick;
             // 
+            // btn_refresh
+            // 
+            btn_refresh.Location = new Point(630, 499);
+            btn_refresh.Name = "btn_refresh";
+            btn_refresh.Size = new Size(150, 46);
+            btn_refresh.TabIndex = 4;
+            btn_refresh.Text = "Refresh";
+            btn_refresh.UseVisualStyleBackColor = true;
+            btn_refresh.Click += btn_refresh_Click;
+            // 
             // MoviesForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1441, 799);
+            ClientSize = new Size(870, 631);
+            Controls.Add(btn_refresh);
             Controls.Add(dgv_Movies);
             Controls.Add(btn_back);
             Controls.Add(label1);
@@ -86,5 +98,6 @@
         private Label label1;
         private Button btn_back;
         private DataGridView dgv_Movies;
+        private Button btn_refresh;
     }
 }

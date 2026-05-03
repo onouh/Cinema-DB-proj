@@ -38,6 +38,12 @@ namespace CinemaDB_GUI
             seatsForm.Show();
         }
 
+        private void btn_CustomerManageBookings_Click(object sender, EventArgs e)
+        {
+            CustomerManageBookingsForm form = new CustomerManageBookingsForm();
+            form.Show();
+        }
+
         // ── Admin Section ──
 
         private void btn_ManageCustomers_Click(object sender, EventArgs e)

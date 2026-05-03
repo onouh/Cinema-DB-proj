@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.Sql;
+using Microsoft.Data.Sql;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -21,12 +21,16 @@ namespace CinemaDB_GUI
 
         private void MoviesForm_Load(object sender, EventArgs e)
         {
-            using (SqlConnection con = new SqlConnection("Data Source=localhost;Initial Catalog=CinemaDB;Integrated Security=SSPI;TrustServerCertificate=True"))
-            {
-                con.Open();
-                using (SqlCommand cmd = new SqlCommand("sp_ViewAvailableMovies", con))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            SqlConnection con = new SqlConnection("Data Source=localhost;Initial Catalog=CinemaDB;Integrated Security=SSPI;TrustServerCertificate=True");
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand("sp_ViewAvailableMovies", con);
+            cmd.CommandType = CommandType.StoredProcedure;
 
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
@@ -37,6 +41,10 @@ namespace CinemaDB_GUI
             }
         }
 
+        private void btn_refresh_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
 
         private void label1_Click(object sender, EventArgs e)
         {

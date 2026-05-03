@@ -23,6 +23,7 @@ namespace CinemaDB_GUI
             btn_ViewMovies = new Button();
             btn_ViewMyTickets = new Button();
             btn_ViewSeats = new Button();
+            btn_CustomerManageBookings = new Button();
             btn_ManageCustomers = new Button();
             btn_ManageMovies = new Button();
             btn_ManageCinemas = new Button();
@@ -89,6 +90,19 @@ namespace CinemaDB_GUI
             btn_ViewSeats.Text = "View Available Seats";
             btn_ViewSeats.UseVisualStyleBackColor = false;
             btn_ViewSeats.Click += btn_ViewSeats_Click;
+            // 
+            // btn_CustomerManageBookings
+            // 
+            btn_CustomerManageBookings.BackColor = Color.LightSkyBlue;
+            btn_CustomerManageBookings.FlatStyle = FlatStyle.Flat;
+            btn_CustomerManageBookings.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btn_CustomerManageBookings.Location = new Point(100, 380);
+            btn_CustomerManageBookings.Name = "btn_CustomerManageBookings";
+            btn_CustomerManageBookings.Size = new Size(250, 55);
+            btn_CustomerManageBookings.TabIndex = 11;
+            btn_CustomerManageBookings.Text = "Manage My Bookings";
+            btn_CustomerManageBookings.UseVisualStyleBackColor = false;
+            btn_CustomerManageBookings.Click += btn_CustomerManageBookings_Click;
             // 
             // labelAdmin
             // 
@@ -178,6 +192,7 @@ namespace CinemaDB_GUI
             Controls.Add(btn_ManageMovies);
             Controls.Add(btn_ManageCustomers);
             Controls.Add(labelAdmin);
+            Controls.Add(btn_CustomerManageBookings);
             Controls.Add(btn_ViewSeats);
             Controls.Add(btn_ViewMyTickets);
             Controls.Add(btn_ViewMovies);
@@ -199,6 +214,7 @@ namespace CinemaDB_GUI
         private Button btn_ViewMovies;
         private Button btn_ViewMyTickets;
         private Button btn_ViewSeats;
+        private Button btn_CustomerManageBookings;
         private Button btn_ManageCustomers;
         private Button btn_ManageMovies;
         private Button btn_ManageCinemas;
