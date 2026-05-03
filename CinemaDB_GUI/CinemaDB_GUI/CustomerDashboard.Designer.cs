@@ -28,348 +28,370 @@ namespace CinemaDB_GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.panelSidebar = new System.Windows.Forms.Panel();
-            this.btnPaymentCancel = new System.Windows.Forms.Button();
-            this.btnMyBookings = new System.Windows.Forms.Button();
-            this.btnMakeBooking = new System.Windows.Forms.Button();
-            this.btnAvailableSeats = new System.Windows.Forms.Button();
-            this.btnShowtimes = new System.Windows.Forms.Button();
-            this.btnSearchGenre = new System.Windows.Forms.Button();
-            this.btnBrowseMovies = new System.Windows.Forms.Button();
-            this.panelLogo = new System.Windows.Forms.Panel();
-            this.lblLogo = new System.Windows.Forms.Label();
-            this.panelHeader = new System.Windows.Forms.Panel();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.panelContent = new System.Windows.Forms.Panel();
-            this.dgvResults = new System.Windows.Forms.DataGridView();
-            this.panelInput = new System.Windows.Forms.Panel();
-            this.btnExecute = new System.Windows.Forms.Button();
-            this.txtInput2 = new System.Windows.Forms.TextBox();
-            this.lblInput2 = new System.Windows.Forms.Label();
-            this.txtInput1 = new System.Windows.Forms.TextBox();
-            this.lblInput1 = new System.Windows.Forms.Label();
-            this.panelSidebar.SuspendLayout();
-            this.panelLogo.SuspendLayout();
-            this.panelHeader.SuspendLayout();
-            this.panelContent.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).BeginInit();
-            this.panelInput.SuspendLayout();
-            this.SuspendLayout();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            panelSidebar = new Panel();
+            btnPaymentCancel = new Button();
+            btnMyBookings = new Button();
+            btnMakeBooking = new Button();
+            btnAvailableSeats = new Button();
+            btnShowtimes = new Button();
+            btnSearchGenre = new Button();
+            btnBrowseMovies = new Button();
+            panelLogo = new Panel();
+            lblLogo = new Label();
+            panelHeader = new Panel();
+            lblTitle = new Label();
+            panelContent = new Panel();
+            dgvResults = new DataGridView();
+            panelInput = new Panel();
+            btnExecute = new Button();
+            txtInput2 = new TextBox();
+            lblInput2 = new Label();
+            txtInput1 = new TextBox();
+            lblInput1 = new Label();
+            panelSidebar.SuspendLayout();
+            panelLogo.SuspendLayout();
+            panelHeader.SuspendLayout();
+            panelContent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvResults).BeginInit();
+            panelInput.SuspendLayout();
+            SuspendLayout();
             // 
             // panelSidebar
             // 
-            this.panelSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65)))));
-            this.panelSidebar.Controls.Add(this.btnPaymentCancel);
-            this.panelSidebar.Controls.Add(this.btnMyBookings);
-            this.panelSidebar.Controls.Add(this.btnMakeBooking);
-            this.panelSidebar.Controls.Add(this.btnAvailableSeats);
-            this.panelSidebar.Controls.Add(this.btnShowtimes);
-            this.panelSidebar.Controls.Add(this.btnSearchGenre);
-            this.panelSidebar.Controls.Add(this.btnBrowseMovies);
-            this.panelSidebar.Controls.Add(this.panelLogo);
-            this.panelSidebar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelSidebar.Location = new System.Drawing.Point(0, 0);
-            this.panelSidebar.Name = "panelSidebar";
-            this.panelSidebar.Size = new System.Drawing.Size(250, 681);
-            this.panelSidebar.TabIndex = 0;
+            panelSidebar.BackColor = Color.FromArgb(41, 53, 65);
+            panelSidebar.Controls.Add(btnPaymentCancel);
+            panelSidebar.Controls.Add(btnMyBookings);
+            panelSidebar.Controls.Add(btnMakeBooking);
+            panelSidebar.Controls.Add(btnAvailableSeats);
+            panelSidebar.Controls.Add(btnShowtimes);
+            panelSidebar.Controls.Add(btnSearchGenre);
+            panelSidebar.Controls.Add(btnBrowseMovies);
+            panelSidebar.Controls.Add(panelLogo);
+            panelSidebar.Dock = DockStyle.Left;
+            panelSidebar.Location = new Point(0, 0);
+            panelSidebar.Margin = new Padding(6, 6, 6, 6);
+            panelSidebar.Name = "panelSidebar";
+            panelSidebar.Size = new Size(464, 1453);
+            panelSidebar.TabIndex = 0;
             // 
             // btnPaymentCancel
             // 
-            this.btnPaymentCancel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnPaymentCancel.FlatAppearance.BorderSize = 0;
-            this.btnPaymentCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPaymentCancel.Font = new System.Drawing.Font("Segoe UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnPaymentCancel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnPaymentCancel.Location = new System.Drawing.Point(0, 440);
-            this.btnPaymentCancel.Name = "btnPaymentCancel";
-            this.btnPaymentCancel.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.btnPaymentCancel.Size = new System.Drawing.Size(250, 60);
-            this.btnPaymentCancel.TabIndex = 7;
-            this.btnPaymentCancel.Text = "Confirm / Cancel Booking";
-            this.btnPaymentCancel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPaymentCancel.UseVisualStyleBackColor = true;
-            this.btnPaymentCancel.Click += new System.EventHandler(this.BtnPaymentCancel_Click);
+            btnPaymentCancel.Dock = DockStyle.Top;
+            btnPaymentCancel.FlatAppearance.BorderSize = 0;
+            btnPaymentCancel.FlatStyle = FlatStyle.Flat;
+            btnPaymentCancel.Font = new Font("Segoe UI", 10.5F);
+            btnPaymentCancel.ForeColor = Color.Gainsboro;
+            btnPaymentCancel.Location = new Point(0, 939);
+            btnPaymentCancel.Margin = new Padding(6, 6, 6, 6);
+            btnPaymentCancel.Name = "btnPaymentCancel";
+            btnPaymentCancel.Padding = new Padding(28, 0, 0, 0);
+            btnPaymentCancel.Size = new Size(464, 128);
+            btnPaymentCancel.TabIndex = 7;
+            btnPaymentCancel.Text = "Confirm / Cancel Booking";
+            btnPaymentCancel.TextAlign = ContentAlignment.MiddleLeft;
+            btnPaymentCancel.UseVisualStyleBackColor = true;
+            btnPaymentCancel.Click += BtnPaymentCancel_Click;
             // 
             // btnMyBookings
             // 
-            this.btnMyBookings.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnMyBookings.FlatAppearance.BorderSize = 0;
-            this.btnMyBookings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMyBookings.Font = new System.Drawing.Font("Segoe UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnMyBookings.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnMyBookings.Location = new System.Drawing.Point(0, 380);
-            this.btnMyBookings.Name = "btnMyBookings";
-            this.btnMyBookings.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.btnMyBookings.Size = new System.Drawing.Size(250, 60);
-            this.btnMyBookings.TabIndex = 6;
-            this.btnMyBookings.Text = "My Bookings & Tickets";
-            this.btnMyBookings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMyBookings.UseVisualStyleBackColor = true;
-            this.btnMyBookings.Click += new System.EventHandler(this.BtnMyBookings_Click);
+            btnMyBookings.Dock = DockStyle.Top;
+            btnMyBookings.FlatAppearance.BorderSize = 0;
+            btnMyBookings.FlatStyle = FlatStyle.Flat;
+            btnMyBookings.Font = new Font("Segoe UI", 10.5F);
+            btnMyBookings.ForeColor = Color.Gainsboro;
+            btnMyBookings.Location = new Point(0, 811);
+            btnMyBookings.Margin = new Padding(6, 6, 6, 6);
+            btnMyBookings.Name = "btnMyBookings";
+            btnMyBookings.Padding = new Padding(28, 0, 0, 0);
+            btnMyBookings.Size = new Size(464, 128);
+            btnMyBookings.TabIndex = 6;
+            btnMyBookings.Text = "My Bookings & Tickets";
+            btnMyBookings.TextAlign = ContentAlignment.MiddleLeft;
+            btnMyBookings.UseVisualStyleBackColor = true;
+            btnMyBookings.Click += BtnMyBookings_Click;
             // 
             // btnMakeBooking
             // 
-            this.btnMakeBooking.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnMakeBooking.FlatAppearance.BorderSize = 0;
-            this.btnMakeBooking.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMakeBooking.Font = new System.Drawing.Font("Segoe UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnMakeBooking.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnMakeBooking.Location = new System.Drawing.Point(0, 320);
-            this.btnMakeBooking.Name = "btnMakeBooking";
-            this.btnMakeBooking.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.btnMakeBooking.Size = new System.Drawing.Size(250, 60);
-            this.btnMakeBooking.TabIndex = 5;
-            this.btnMakeBooking.Text = "Make a Booking";
-            this.btnMakeBooking.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMakeBooking.UseVisualStyleBackColor = true;
-            this.btnMakeBooking.Click += new System.EventHandler(this.BtnMakeBooking_Click);
+            btnMakeBooking.Dock = DockStyle.Top;
+            btnMakeBooking.FlatAppearance.BorderSize = 0;
+            btnMakeBooking.FlatStyle = FlatStyle.Flat;
+            btnMakeBooking.Font = new Font("Segoe UI", 10.5F);
+            btnMakeBooking.ForeColor = Color.Gainsboro;
+            btnMakeBooking.Location = new Point(0, 683);
+            btnMakeBooking.Margin = new Padding(6, 6, 6, 6);
+            btnMakeBooking.Name = "btnMakeBooking";
+            btnMakeBooking.Padding = new Padding(28, 0, 0, 0);
+            btnMakeBooking.Size = new Size(464, 128);
+            btnMakeBooking.TabIndex = 5;
+            btnMakeBooking.Text = "Make a Booking";
+            btnMakeBooking.TextAlign = ContentAlignment.MiddleLeft;
+            btnMakeBooking.UseVisualStyleBackColor = true;
+            btnMakeBooking.Click += BtnMakeBooking_Click;
             // 
             // btnAvailableSeats
             // 
-            this.btnAvailableSeats.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnAvailableSeats.FlatAppearance.BorderSize = 0;
-            this.btnAvailableSeats.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAvailableSeats.Font = new System.Drawing.Font("Segoe UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnAvailableSeats.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnAvailableSeats.Location = new System.Drawing.Point(0, 260);
-            this.btnAvailableSeats.Name = "btnAvailableSeats";
-            this.btnAvailableSeats.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.btnAvailableSeats.Size = new System.Drawing.Size(250, 60);
-            this.btnAvailableSeats.TabIndex = 4;
-            this.btnAvailableSeats.Text = "Available Seats";
-            this.btnAvailableSeats.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAvailableSeats.UseVisualStyleBackColor = true;
-            this.btnAvailableSeats.Click += new System.EventHandler(this.BtnAvailableSeats_Click);
+            btnAvailableSeats.Dock = DockStyle.Top;
+            btnAvailableSeats.FlatAppearance.BorderSize = 0;
+            btnAvailableSeats.FlatStyle = FlatStyle.Flat;
+            btnAvailableSeats.Font = new Font("Segoe UI", 10.5F);
+            btnAvailableSeats.ForeColor = Color.Gainsboro;
+            btnAvailableSeats.Location = new Point(0, 555);
+            btnAvailableSeats.Margin = new Padding(6, 6, 6, 6);
+            btnAvailableSeats.Name = "btnAvailableSeats";
+            btnAvailableSeats.Padding = new Padding(28, 0, 0, 0);
+            btnAvailableSeats.Size = new Size(464, 128);
+            btnAvailableSeats.TabIndex = 4;
+            btnAvailableSeats.Text = "Available Seats";
+            btnAvailableSeats.TextAlign = ContentAlignment.MiddleLeft;
+            btnAvailableSeats.UseVisualStyleBackColor = true;
+            btnAvailableSeats.Click += BtnAvailableSeats_Click;
             // 
             // btnShowtimes
             // 
-            this.btnShowtimes.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnShowtimes.FlatAppearance.BorderSize = 0;
-            this.btnShowtimes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowtimes.Font = new System.Drawing.Font("Segoe UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnShowtimes.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnShowtimes.Location = new System.Drawing.Point(0, 200);
-            this.btnShowtimes.Name = "btnShowtimes";
-            this.btnShowtimes.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.btnShowtimes.Size = new System.Drawing.Size(250, 60);
-            this.btnShowtimes.TabIndex = 3;
-            this.btnShowtimes.Text = "View Showtimes";
-            this.btnShowtimes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnShowtimes.UseVisualStyleBackColor = true;
-            this.btnShowtimes.Click += new System.EventHandler(this.BtnShowtimes_Click);
+            btnShowtimes.Dock = DockStyle.Top;
+            btnShowtimes.FlatAppearance.BorderSize = 0;
+            btnShowtimes.FlatStyle = FlatStyle.Flat;
+            btnShowtimes.Font = new Font("Segoe UI", 10.5F);
+            btnShowtimes.ForeColor = Color.Gainsboro;
+            btnShowtimes.Location = new Point(0, 427);
+            btnShowtimes.Margin = new Padding(6, 6, 6, 6);
+            btnShowtimes.Name = "btnShowtimes";
+            btnShowtimes.Padding = new Padding(28, 0, 0, 0);
+            btnShowtimes.Size = new Size(464, 128);
+            btnShowtimes.TabIndex = 3;
+            btnShowtimes.Text = "View Showtimes";
+            btnShowtimes.TextAlign = ContentAlignment.MiddleLeft;
+            btnShowtimes.UseVisualStyleBackColor = true;
+            btnShowtimes.Click += BtnShowtimes_Click;
             // 
             // btnSearchGenre
             // 
-            this.btnSearchGenre.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSearchGenre.FlatAppearance.BorderSize = 0;
-            this.btnSearchGenre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearchGenre.Font = new System.Drawing.Font("Segoe UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnSearchGenre.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnSearchGenre.Location = new System.Drawing.Point(0, 140);
-            this.btnSearchGenre.Name = "btnSearchGenre";
-            this.btnSearchGenre.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.btnSearchGenre.Size = new System.Drawing.Size(250, 60);
-            this.btnSearchGenre.TabIndex = 2;
-            this.btnSearchGenre.Text = "Search by Genre";
-            this.btnSearchGenre.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSearchGenre.UseVisualStyleBackColor = true;
-            this.btnSearchGenre.Click += new System.EventHandler(this.BtnSearchGenre_Click);
+            btnSearchGenre.Dock = DockStyle.Top;
+            btnSearchGenre.FlatAppearance.BorderSize = 0;
+            btnSearchGenre.FlatStyle = FlatStyle.Flat;
+            btnSearchGenre.Font = new Font("Segoe UI", 10.5F);
+            btnSearchGenre.ForeColor = Color.Gainsboro;
+            btnSearchGenre.Location = new Point(0, 299);
+            btnSearchGenre.Margin = new Padding(6, 6, 6, 6);
+            btnSearchGenre.Name = "btnSearchGenre";
+            btnSearchGenre.Padding = new Padding(28, 0, 0, 0);
+            btnSearchGenre.Size = new Size(464, 128);
+            btnSearchGenre.TabIndex = 2;
+            btnSearchGenre.Text = "Search by Genre";
+            btnSearchGenre.TextAlign = ContentAlignment.MiddleLeft;
+            btnSearchGenre.UseVisualStyleBackColor = true;
+            btnSearchGenre.Click += BtnSearchGenre_Click;
             // 
             // btnBrowseMovies
             // 
-            this.btnBrowseMovies.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnBrowseMovies.FlatAppearance.BorderSize = 0;
-            this.btnBrowseMovies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBrowseMovies.Font = new System.Drawing.Font("Segoe UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnBrowseMovies.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnBrowseMovies.Location = new System.Drawing.Point(0, 80);
-            this.btnBrowseMovies.Name = "btnBrowseMovies";
-            this.btnBrowseMovies.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.btnBrowseMovies.Size = new System.Drawing.Size(250, 60);
-            this.btnBrowseMovies.TabIndex = 1;
-            this.btnBrowseMovies.Text = "Browse All Movies";
-            this.btnBrowseMovies.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBrowseMovies.UseVisualStyleBackColor = true;
-            this.btnBrowseMovies.Click += new System.EventHandler(this.BtnBrowseMovies_Click);
+            btnBrowseMovies.Dock = DockStyle.Top;
+            btnBrowseMovies.FlatAppearance.BorderSize = 0;
+            btnBrowseMovies.FlatStyle = FlatStyle.Flat;
+            btnBrowseMovies.Font = new Font("Segoe UI", 10.5F);
+            btnBrowseMovies.ForeColor = Color.Gainsboro;
+            btnBrowseMovies.Location = new Point(0, 171);
+            btnBrowseMovies.Margin = new Padding(6, 6, 6, 6);
+            btnBrowseMovies.Name = "btnBrowseMovies";
+            btnBrowseMovies.Padding = new Padding(28, 0, 0, 0);
+            btnBrowseMovies.Size = new Size(464, 128);
+            btnBrowseMovies.TabIndex = 1;
+            btnBrowseMovies.Text = "Browse All Movies";
+            btnBrowseMovies.TextAlign = ContentAlignment.MiddleLeft;
+            btnBrowseMovies.UseVisualStyleBackColor = true;
+            btnBrowseMovies.Click += BtnBrowseMovies_Click;
             // 
             // panelLogo
             // 
-            this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(126)))), ((int)(((byte)(49)))));
-            this.panelLogo.Controls.Add(this.lblLogo);
-            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelLogo.Location = new System.Drawing.Point(0, 0);
-            this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(250, 80);
-            this.panelLogo.TabIndex = 0;
+            panelLogo.BackColor = Color.FromArgb(229, 126, 49);
+            panelLogo.Controls.Add(lblLogo);
+            panelLogo.Dock = DockStyle.Top;
+            panelLogo.Location = new Point(0, 0);
+            panelLogo.Margin = new Padding(6, 6, 6, 6);
+            panelLogo.Name = "panelLogo";
+            panelLogo.Size = new Size(464, 171);
+            panelLogo.TabIndex = 0;
             // 
             // lblLogo
             // 
-            this.lblLogo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblLogo.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblLogo.ForeColor = System.Drawing.Color.White;
-            this.lblLogo.Location = new System.Drawing.Point(0, 0);
-            this.lblLogo.Name = "lblLogo";
-            this.lblLogo.Size = new System.Drawing.Size(250, 80);
-            this.lblLogo.TabIndex = 0;
-            this.lblLogo.Text = "CinemaDB";
-            this.lblLogo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lblLogo.Dock = DockStyle.Fill;
+            lblLogo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold);
+            lblLogo.ForeColor = Color.White;
+            lblLogo.Location = new Point(0, 0);
+            lblLogo.Margin = new Padding(6, 0, 6, 0);
+            lblLogo.Name = "lblLogo";
+            lblLogo.Size = new Size(464, 171);
+            lblLogo.TabIndex = 0;
+            lblLogo.Text = "CinemaDB";
+            lblLogo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panelHeader
             // 
-            this.panelHeader.BackColor = System.Drawing.Color.White;
-            this.panelHeader.Controls.Add(this.lblTitle);
-            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelHeader.Location = new System.Drawing.Point(250, 0);
-            this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(834, 80);
-            this.panelHeader.TabIndex = 1;
+            panelHeader.BackColor = Color.White;
+            panelHeader.Controls.Add(lblTitle);
+            panelHeader.Dock = DockStyle.Top;
+            panelHeader.Location = new Point(464, 0);
+            panelHeader.Margin = new Padding(6, 6, 6, 6);
+            panelHeader.Name = "panelHeader";
+            panelHeader.Size = new Size(1717, 171);
+            panelHeader.TabIndex = 1;
             // 
             // lblTitle
             // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65)))));
-            this.lblTitle.Location = new System.Drawing.Point(26, 25);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(236, 32);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Customer Dashboard";
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Segoe UI", 18F);
+            lblTitle.ForeColor = Color.FromArgb(41, 53, 65);
+            lblTitle.Location = new Point(48, 53);
+            lblTitle.Margin = new Padding(6, 0, 6, 0);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(475, 65);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "Customer Dashboard";
             // 
             // panelContent
             // 
-            this.panelContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.panelContent.Controls.Add(this.dgvResults);
-            this.panelContent.Controls.Add(this.panelInput);
-            this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContent.Location = new System.Drawing.Point(250, 80);
-            this.panelContent.Name = "panelContent";
-            this.panelContent.Padding = new System.Windows.Forms.Padding(20);
-            this.panelContent.Size = new System.Drawing.Size(834, 601);
-            this.panelContent.TabIndex = 2;
+            panelContent.BackColor = Color.FromArgb(240, 240, 240);
+            panelContent.Controls.Add(dgvResults);
+            panelContent.Controls.Add(panelInput);
+            panelContent.Dock = DockStyle.Fill;
+            panelContent.Location = new Point(464, 171);
+            panelContent.Margin = new Padding(6, 6, 6, 6);
+            panelContent.Name = "panelContent";
+            panelContent.Padding = new Padding(37, 43, 37, 43);
+            panelContent.Size = new Size(1717, 1282);
+            panelContent.TabIndex = 2;
             // 
             // dgvResults
             // 
-            this.dgvResults.AllowUserToAddRows = false;
-            this.dgvResults.AllowUserToDeleteRows = false;
-            this.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvResults.BackgroundColor = System.Drawing.Color.White;
-            this.dgvResults.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvResults.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvResults.ColumnHeadersHeight = 35;
-            this.dgvResults.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvResults.EnableHeadersVisualStyles = false;
-            this.dgvResults.Location = new System.Drawing.Point(20, 100);
-            this.dgvResults.Name = "dgvResults";
-            this.dgvResults.ReadOnly = true;
-            this.dgvResults.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(126)))), ((int)(((byte)(49)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            this.dgvResults.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvResults.RowTemplate.Height = 30;
-            this.dgvResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvResults.Size = new System.Drawing.Size(794, 481);
-            this.dgvResults.TabIndex = 1;
+            dgvResults.AllowUserToAddRows = false;
+            dgvResults.AllowUserToDeleteRows = false;
+            dgvResults.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvResults.BackgroundColor = Color.White;
+            dgvResults.BorderStyle = BorderStyle.None;
+            dgvResults.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(41, 53, 65);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9.75F);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dgvResults.ColumnHeadersHeight = 35;
+            dgvResults.Dock = DockStyle.Fill;
+            dgvResults.EnableHeadersVisualStyles = false;
+            dgvResults.Location = new Point(37, 214);
+            dgvResults.Margin = new Padding(6, 6, 6, 6);
+            dgvResults.Name = "dgvResults";
+            dgvResults.ReadOnly = true;
+            dgvResults.RowHeadersVisible = false;
+            dgvResults.RowHeadersWidth = 82;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F);
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(229, 126, 49);
+            dataGridViewCellStyle2.SelectionForeColor = Color.White;
+            dgvResults.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dgvResults.RowTemplate.Height = 30;
+            dgvResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvResults.Size = new Size(1643, 1025);
+            dgvResults.TabIndex = 1;
             // 
             // panelInput
             // 
-            this.panelInput.BackColor = System.Drawing.Color.White;
-            this.panelInput.Controls.Add(this.btnExecute);
-            this.panelInput.Controls.Add(this.txtInput2);
-            this.panelInput.Controls.Add(this.lblInput2);
-            this.panelInput.Controls.Add(this.txtInput1);
-            this.panelInput.Controls.Add(this.lblInput1);
-            this.panelInput.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelInput.Location = new System.Drawing.Point(20, 20);
-            this.panelInput.Name = "panelInput";
-            this.panelInput.Size = new System.Drawing.Size(794, 80);
-            this.panelInput.TabIndex = 0;
+            panelInput.BackColor = Color.White;
+            panelInput.Controls.Add(btnExecute);
+            panelInput.Controls.Add(txtInput2);
+            panelInput.Controls.Add(lblInput2);
+            panelInput.Controls.Add(txtInput1);
+            panelInput.Controls.Add(lblInput1);
+            panelInput.Dock = DockStyle.Top;
+            panelInput.Location = new Point(37, 43);
+            panelInput.Margin = new Padding(6, 6, 6, 6);
+            panelInput.Name = "panelInput";
+            panelInput.Size = new Size(1643, 171);
+            panelInput.TabIndex = 0;
             // 
             // btnExecute
             // 
-            this.btnExecute.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(126)))), ((int)(((byte)(49)))));
-            this.btnExecute.FlatAppearance.BorderSize = 0;
-            this.btnExecute.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExecute.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnExecute.ForeColor = System.Drawing.Color.White;
-            this.btnExecute.Location = new System.Drawing.Point(623, 23);
-            this.btnExecute.Name = "btnExecute";
-            this.btnExecute.Size = new System.Drawing.Size(120, 35);
-            this.btnExecute.TabIndex = 4;
-            this.btnExecute.Text = "Execute";
-            this.btnExecute.UseVisualStyleBackColor = false;
-            this.btnExecute.Click += new System.EventHandler(this.BtnExecute_Click);
+            btnExecute.BackColor = Color.FromArgb(229, 126, 49);
+            btnExecute.FlatAppearance.BorderSize = 0;
+            btnExecute.FlatStyle = FlatStyle.Flat;
+            btnExecute.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnExecute.ForeColor = Color.White;
+            btnExecute.Location = new Point(1356, 48);
+            btnExecute.Margin = new Padding(6, 6, 6, 6);
+            btnExecute.Name = "btnExecute";
+            btnExecute.Size = new Size(223, 75);
+            btnExecute.TabIndex = 4;
+            btnExecute.Text = "Execute";
+            btnExecute.UseVisualStyleBackColor = false;
+            btnExecute.Click += BtnExecute_Click;
             // 
             // txtInput2
             // 
-            this.txtInput2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtInput2.Location = new System.Drawing.Point(419, 28);
-            this.txtInput2.Name = "txtInput2";
-            this.txtInput2.Size = new System.Drawing.Size(180, 25);
-            this.txtInput2.TabIndex = 3;
+            txtInput2.Font = new Font("Segoe UI", 10F);
+            txtInput2.Location = new Point(969, 63);
+            txtInput2.Margin = new Padding(6, 6, 6, 6);
+            txtInput2.Name = "txtInput2";
+            txtInput2.Size = new Size(331, 43);
+            txtInput2.TabIndex = 3;
             // 
             // lblInput2
             // 
-            this.lblInput2.AutoSize = true;
-            this.lblInput2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblInput2.Location = new System.Drawing.Point(323, 31);
-            this.lblInput2.Name = "lblInput2";
-            this.lblInput2.Size = new System.Drawing.Size(90, 19);
-            this.lblInput2.TabIndex = 2;
-            this.lblInput2.Text = "Parameter 2:";
+            lblInput2.AutoSize = true;
+            lblInput2.Font = new Font("Segoe UI", 10F);
+            lblInput2.Location = new Point(672, 66);
+            lblInput2.Margin = new Padding(6, 0, 6, 0);
+            lblInput2.Name = "lblInput2";
+            lblInput2.Size = new Size(165, 37);
+            lblInput2.TabIndex = 2;
+            lblInput2.Text = "Parameter 2:";
             // 
             // txtInput1
             // 
-            this.txtInput1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtInput1.Location = new System.Drawing.Point(120, 28);
-            this.txtInput1.Name = "txtInput1";
-            this.txtInput1.Size = new System.Drawing.Size(180, 25);
-            this.txtInput1.TabIndex = 1;
+            txtInput1.Font = new Font("Segoe UI", 10F);
+            txtInput1.Location = new Point(314, 63);
+            txtInput1.Margin = new Padding(6, 6, 6, 6);
+            txtInput1.Name = "txtInput1";
+            txtInput1.Size = new Size(331, 43);
+            txtInput1.TabIndex = 1;
             // 
             // lblInput1
             // 
-            this.lblInput1.AutoSize = true;
-            this.lblInput1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblInput1.Location = new System.Drawing.Point(24, 31);
-            this.lblInput1.Name = "lblInput1";
-            this.lblInput1.Size = new System.Drawing.Size(90, 19);
-            this.lblInput1.TabIndex = 0;
-            this.lblInput1.Text = "Parameter 1:";
+            lblInput1.AutoSize = true;
+            lblInput1.Font = new Font("Segoe UI", 10F);
+            lblInput1.Location = new Point(42, 66);
+            lblInput1.Margin = new Padding(6, 0, 6, 0);
+            lblInput1.Name = "lblInput1";
+            lblInput1.Size = new Size(165, 37);
+            lblInput1.TabIndex = 0;
+            lblInput1.Text = "Parameter 1:";
             // 
             // CustomerDashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1084, 681);
-            this.Controls.Add(this.panelContent);
-            this.Controls.Add(this.panelHeader);
-            this.Controls.Add(this.panelSidebar);
-            this.MinimumSize = new System.Drawing.Size(900, 600);
-            this.Name = "CustomerDashboard";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Cinema Ticket Booking System";
-            this.Load += new System.EventHandler(this.CustomerDashboard_Load);
-            this.panelSidebar.ResumeLayout(false);
-            this.panelLogo.ResumeLayout(false);
-            this.panelHeader.ResumeLayout(false);
-            this.panelHeader.PerformLayout();
-            this.panelContent.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).EndInit();
-            this.panelInput.ResumeLayout(false);
-            this.panelInput.PerformLayout();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(2181, 1453);
+            Controls.Add(panelContent);
+            Controls.Add(panelHeader);
+            Controls.Add(panelSidebar);
+            Margin = new Padding(6, 6, 6, 6);
+            MinimumSize = new Size(1649, 1200);
+            Name = "CustomerDashboard";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Cinema Ticket Booking System";
+            Load += CustomerDashboard_Load;
+            panelSidebar.ResumeLayout(false);
+            panelLogo.ResumeLayout(false);
+            panelHeader.ResumeLayout(false);
+            panelHeader.PerformLayout();
+            panelContent.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvResults).EndInit();
+            panelInput.ResumeLayout(false);
+            panelInput.PerformLayout();
+            ResumeLayout(false);
 
         }
 
