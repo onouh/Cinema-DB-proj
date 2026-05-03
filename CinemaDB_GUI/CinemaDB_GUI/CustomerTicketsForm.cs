@@ -1,50 +1,41 @@
-using Microsoft.Data.SqlClient;
 using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
-namespace CinemaDB_GUI
+public partial class CustomerTicketsForm : Form
 {
-    public partial class CustomerTicketsForm : Form
+    string connectionString = "Server=YOUR_SERVER;Database=Cinema Ticket Booking;Trusted_Connection=True;";
+    int currentCustomerId = 1; 
+
+    public CustomerTicketsForm()
     {
-        public CustomerTicketsForm()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        private void btnLoadTickets_Click(object sender, EventArgs e)
+    private void CustomerTicketsForm_Load(object sender, EventArgs e)
+    {
+        using (SqlConnection conn = new SqlConnection(connectionString))
         {
-            if (int.TryParse(textBoxCustomerId.Text, out int customerId))
+            // Use the comprehensive view from your SQL file here
+            string query = @"
+                SELECT m.Title, c.RoomName, s.StartTime, t.SeatNumber 
+                FROM Tickets t
+                JOIN Bookings b ON t.BookingID = b.BookingID
+                JOIN Showtimes s ON b.ShowtimeID = s.ShowtimeID
+                JOIN Movies m ON s.MovieID = m.MovieID
+                JOIN Cinemas c ON s.CinemaID = c.CinemaID
+                WHERE b.CustomerID = @CustID";
+
+            using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                using (SqlConnection con = new SqlConnection("Data Source=localhost;Initial Catalog=CinemaDB;Integrated Security=SSPI;TrustServerCertificate=True"))
-                {
-                    con.Open();
-                    using (SqlCommand cmd = new SqlCommand("sp_ViewCustomerTickets", con))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@customer_id", customerId);
-
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        dgvTickets.DataSource = dt;
-                    }
-                }
+                cmd.Parameters.AddWithValue("@CustID", currentCustomerId);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                
+                dgvTickets.DataSource = dt;
             }
-            else
-            {
-                MessageBox.Show("Please enter a valid numeric Customer ID.");
-            }
-        }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void CustomerTicketsForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

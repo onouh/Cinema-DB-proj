@@ -1,79 +1,30 @@
-using Microsoft.Data.SqlClient;
-using System;
 using System.Data;
-using System.Drawing;
-using System.Windows.Forms;
+using System.Data.SqlClient;
 
-namespace CinemaDB_GUI
+// Inside your specific Form class (e.g., MoviesForm)
+private void LoadDataToGrid()
 {
-    public partial class Form1 : Form
+    // 1. Your connection string to the Cinema Ticket Booking database
+    string connectionString = "Server=YOUR_SERVER_NAME;Database=Cinema Ticket Booking;Trusted_Connection=True;";
+    
+    // 2. The query or stored procedure name from Customer_All_GUI_Ready.sql
+    string query = "SELECT * FROM vw_CustomerAvailableMovies"; 
+
+    using (SqlConnection connection = new SqlConnection(connectionString))
     {
-        public Form1()
+        try
         {
-            InitializeComponent();
+            connection.Open();
+            SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+            DataTable dataTable = new DataTable();
+            
+            // 3. Fill the table and bind it to your GUI Scene
+            adapter.Fill(dataTable);
+            moviesDataGridView.DataSource = dataTable; 
         }
-
-        private void Form1_Load(object sender, EventArgs e)
+        catch (Exception ex)
         {
-
-        }
-
-        // ── Customer Section ──
-
-        private void btn_ViewMovies_Click(object sender, EventArgs e)
-        {
-            MoviesForm moviesForm = new MoviesForm();
-            moviesForm.Show();
-        }
-
-        private void btn_ViewMyTickets_Click(object sender, EventArgs e)
-        {
-            CustomerTicketsForm ticketsForm = new CustomerTicketsForm();
-            ticketsForm.Show();
-        }
-
-        private void btn_ViewSeats_Click(object sender, EventArgs e)
-        {
-            AvailableSeatsForm seatsForm = new AvailableSeatsForm();
-            seatsForm.Show();
-        }
-
-        private void btn_CustomerManageBookings_Click(object sender, EventArgs e)
-        {
-            CustomerManageBookingsForm form = new CustomerManageBookingsForm();
-            form.Show();
-        }
-
-        // ── Admin Section ──
-
-        private void btn_ManageCustomers_Click(object sender, EventArgs e)
-        {
-            ManageCustomersForm form = new ManageCustomersForm();
-            form.Show();
-        }
-
-        private void btn_ManageMovies_Click(object sender, EventArgs e)
-        {
-            ManageMoviesForm form = new ManageMoviesForm();
-            form.Show();
-        }
-
-        private void btn_ManageCinemas_Click(object sender, EventArgs e)
-        {
-            ManageCinemasForm form = new ManageCinemasForm();
-            form.Show();
-        }
-
-        private void btn_ManageShowtimes_Click(object sender, EventArgs e)
-        {
-            ManageShowtimesForm form = new ManageShowtimesForm();
-            form.Show();
-        }
-
-        private void btn_ManageBookings_Click(object sender, EventArgs e)
-        {
-            ManageBookingsForm form = new ManageBookingsForm();
-            form.Show();
+            MessageBox.Show("Database Error: " + ex.Message);
         }
     }
 }
