@@ -1,19 +1,14 @@
-using Microsoft.Data.Sql;
 using Microsoft.Data.SqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-
-
 
 namespace CinemaDB_GUI
 {
     public partial class MoviesForm : Form
     {
+        private string connectionString = "Data Source=localhost;Initial Catalog=CinemaDB;Integrated Security=SSPI;TrustServerCertificate=True";
+
         public MoviesForm()
         {
             InitializeComponent();
@@ -26,7 +21,7 @@ namespace CinemaDB_GUI
 
         private void LoadData()
         {
-            using (SqlConnection con = new SqlConnection("Data Source=localhost;Initial Catalog=CinemaDB;Integrated Security=SSPI;TrustServerCertificate=True"))
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
 
