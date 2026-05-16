@@ -1,20 +1,6 @@
--- ============================================================
--- Cinema Ticket Booking System
--- Customer-Side: Stored Procedures & User-Defined Functions
--- GUI-Ready Version (no PRINT — all results via SELECT / OUTPUT)
--- CSE244: Database System Design | Team #4
--- Ain Shams University, Faculty of Engineering
--- ============================================================
-
-
--- ==============================================================
--- SECTION 1: STORED PROCEDURES
--- ==============================================================
-
 
 -- --------------------------------------------------------------
 -- 1.1  Browse All Available Movies
--- GUI reads: result set of all movies + genres
 -- --------------------------------------------------------------
 DROP PROCEDURE IF EXISTS sp_GetAllMovies;
 GO
@@ -34,12 +20,10 @@ BEGIN
 END;
 GO
 
--- EXEC sp_GetAllMovies;
 
 
 -- --------------------------------------------------------------
 -- 1.2  Search Movies by Genre
--- GUI reads: result set filtered by genre
 -- --------------------------------------------------------------
 DROP PROCEDURE IF EXISTS sp_GetMoviesByGenre;
 GO
@@ -65,7 +49,6 @@ GO
 
 -- --------------------------------------------------------------
 -- 1.3  View Showtimes for a Specific Movie
--- GUI reads: result set of showtimes
 -- --------------------------------------------------------------
 DROP PROCEDURE IF EXISTS sp_GetShowtimesByMovie;
 GO
@@ -96,7 +79,6 @@ GO
 
 -- --------------------------------------------------------------
 -- 1.4  View Available Seats for a Showtime
--- GUI reads: result set of free seats
 -- --------------------------------------------------------------
 DROP PROCEDURE IF EXISTS sp_GetAvailableSeats;
 GO
@@ -136,8 +118,6 @@ GO
 
 -- --------------------------------------------------------------
 -- 1.5  Make a Booking
--- GUI reads: @NewBookingID > 0 = success | -1 = failed
---            @ErrorMessage  = '' = success | reason = failed
 -- --------------------------------------------------------------
 DROP PROCEDURE IF EXISTS sp_MakeBooking;
 GO
@@ -246,7 +226,6 @@ GO
 
 -- --------------------------------------------------------------
 -- 1.6  View My Bookings
--- GUI reads: result set of all bookings for that customer
 -- --------------------------------------------------------------
 DROP PROCEDURE IF EXISTS sp_GetMyBookings;
 GO
@@ -273,7 +252,6 @@ GO
 
 -- --------------------------------------------------------------
 -- 1.7  View My Ticket Details
--- GUI reads: result set with full reservation info per ticket
 -- --------------------------------------------------------------
 DROP PROCEDURE IF EXISTS sp_GetMyTickets;
 GO
@@ -313,8 +291,6 @@ GO
 
 -- --------------------------------------------------------------
 -- 1.8  Cancel a Booking
--- GUI reads: @Success = 1 = done | 0 = failed
---            @ErrorMessage = '' = success | reason = failed
 -- --------------------------------------------------------------
 DROP PROCEDURE IF EXISTS sp_CancelBooking;
 GO
@@ -369,8 +345,6 @@ GO
 
 -- --------------------------------------------------------------
 -- 1.9  Confirm Payment
--- GUI reads: @Success = 1 = done | 0 = failed
---            @ErrorMessage = '' = success | reason = failed
 -- --------------------------------------------------------------
 DROP PROCEDURE IF EXISTS sp_ConfirmPayment;
 GO
@@ -433,14 +407,11 @@ EXEC sp_ConfirmPayment 1, 1, @Ok OUTPUT, @Err OUTPUT;
 SELECT @Ok AS Success, @Err AS ErrorMessage;
 
 
--- ==============================================================
--- SECTION 2: SCALAR FUNCTIONS
--- ==============================================================
+
 
 
 -- --------------------------------------------------------------
 -- 2.1  Calculate Total Ticket Price  (seat + slot)
--- GUI usage: SELECT dbo.fn_CalcTicketPrice(1, 1) AS Price
 -- --------------------------------------------------------------
 DROP FUNCTION IF EXISTS dbo.fn_CalcTicketPrice;
 GO
@@ -484,7 +455,6 @@ SELECT dbo.fn_CalcTicketPrice(1, 1) AS TicketPrice;
 
 -- --------------------------------------------------------------
 -- 2.2  Get Total Amount Spent by a Customer
--- GUI usage: SELECT dbo.fn_GetCustomerTotalSpent(1) AS TotalSpent
 -- --------------------------------------------------------------
 DROP FUNCTION IF EXISTS dbo.fn_GetCustomerTotalSpent;
 GO
@@ -513,7 +483,6 @@ GO
 
 -- --------------------------------------------------------------
 -- 2.3  Count Bookings for a Customer
--- GUI usage: SELECT dbo.fn_CountCustomerBookings(1) AS Total
 -- --------------------------------------------------------------
 DROP FUNCTION IF EXISTS dbo.fn_CountCustomerBookings;
 GO
@@ -540,7 +509,6 @@ GO
 
 -- --------------------------------------------------------------
 -- 2.4  Get Movie Duration Label
--- GUI usage: display 'Short' / 'Standard' / 'Long' on movie card
 -- --------------------------------------------------------------
 DROP FUNCTION IF EXISTS dbo.fn_GetMovieDurationLabel;
 GO
@@ -575,14 +543,9 @@ GO
 -- FROM MOVIE;
 
 
--- ==============================================================
--- SECTION 3: INLINE TABLE-VALUED FUNCTIONS
--- ==============================================================
-
 
 -- --------------------------------------------------------------
 -- 3.1  Get Showtimes on a Specific Date
--- GUI usage: SELECT * FROM dbo.fn_GetShowtimesByDate('2026-04-25')
 -- --------------------------------------------------------------
 DROP FUNCTION IF EXISTS dbo.fn_GetShowtimesByDate;
 GO
@@ -615,7 +578,6 @@ GO
 
 -- --------------------------------------------------------------
 -- 3.2  Get Movies Showing in a Specific Cinema
--- GUI usage: SELECT * FROM dbo.fn_GetMoviesByCinema(1)
 -- --------------------------------------------------------------
 DROP FUNCTION IF EXISTS dbo.fn_GetMoviesByCinema;
 GO
@@ -646,7 +608,6 @@ GO
 
 -- --------------------------------------------------------------
 -- 3.3  Get Full Booking Details for a Customer
--- GUI usage: SELECT * FROM dbo.fn_GetCustomerBookingDetails(1)
 -- --------------------------------------------------------------
 DROP FUNCTION IF EXISTS dbo.fn_GetCustomerBookingDetails;
 GO
@@ -691,15 +652,9 @@ GO
 -- WHERE booking_status = 'confirmed' ORDER BY show_date DESC;
 
 
--- ==============================================================
--- SECTION 4: MULTI-STATEMENT TABLE-VALUED FUNCTIONS
--- ==============================================================
-
 
 -- --------------------------------------------------------------
 -- 4.1  Get Movies Filtered by Slot Type
--- @SlotType: 'Today' | 'Weekend' | 'All'
--- GUI usage: SELECT * FROM dbo.fn_GetMoviesBySlotType('Today')
 -- --------------------------------------------------------------
 DROP FUNCTION IF EXISTS dbo.fn_GetMoviesBySlotType;
 GO
@@ -765,8 +720,6 @@ GO
 
 -- --------------------------------------------------------------
 -- 4.2  Get Customer Booking Summary by Status
--- @SummaryType: 'Confirmed' | 'Cancelled' | 'All'
--- GUI usage: SELECT * FROM dbo.fn_GetCustomerBookingSummary(1,'All')
 -- --------------------------------------------------------------
 DROP FUNCTION IF EXISTS dbo.fn_GetCustomerBookingSummary;
 GO
@@ -840,34 +793,3 @@ GO
 -- SELECT * FROM dbo.fn_GetCustomerBookingSummary(1, 'All');
 
 
--- ==============================================================
--- GUI INTEGRATION REFERENCE
--- ==============================================================
---
--- READ operations  (procedures / functions that return rows)
--- → GUI binds the result set directly to a data grid / list
---
---   sp_GetAllMovies
---   sp_GetMoviesByGenre        @Genre
---   sp_GetShowtimesByMovie     @MovieID
---   sp_GetAvailableSeats       @ShowtimeID
---   sp_GetMyBookings           @CustomerID
---   sp_GetMyTickets            @CustomerID
---   fn_GetShowtimesByDate      @ShowDate
---   fn_GetMoviesByCinema       @CinemaID
---   fn_GetCustomerBookingDetails   @CustomerID
---   fn_GetMoviesBySlotType     @SlotType
---   fn_GetCustomerBookingSummary   @CustomerID, @SummaryType
---
--- SCALAR functions  (return a single value — use inline in queries)
---   dbo.fn_CalcTicketPrice         (@ShowtimeID, @SeatNo)
---   dbo.fn_GetCustomerTotalSpent   (@CustomerID)
---   dbo.fn_CountCustomerBookings   (@CustomerID)
---   dbo.fn_GetMovieDurationLabel   (@MovieID)
---
--- WRITE operations  (check output params after calling)
---   sp_MakeBooking     → @NewBookingID > 0 = OK | @ErrorMessage for failure
---   sp_CancelBooking   → @Success = 1 = OK     | @ErrorMessage for failure
---   sp_ConfirmPayment  → @Success = 1 = OK     | @ErrorMessage for failure
---
--- ==============================================================

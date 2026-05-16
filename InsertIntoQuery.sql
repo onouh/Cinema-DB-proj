@@ -100,26 +100,19 @@ INSERT INTO RESERVATION VALUES
 
 
 
--- -------------------------------------------------------
--- 1. ADDING MORE CUSTOMERS (To test TOP 3 and LEFT JOINS)
--- -------------------------------------------------------
+-
 INSERT INTO CUSTOMER (first_name, last_name, email, phone, password) VALUES
 ('Noreen', 'Tawfik', 'noreen@eng.asu.edu.eg', '01155555555', 'noreenpass'),
 ('Tasneem', 'Nasr', 'tasneem@eng.asu.edu.eg', '01266666666', 'tasneempass'),
 ('Habiba', 'Kotb', 'habiba@eng.asu.edu.eg', '01577777777', 'habibapass');
 
--- -------------------------------------------------------
--- 2. ADDING MORE SHOWTIMES (To test "Now Showing" and RIGHT JOINS)
--- -------------------------------------------------------
 -- Adding showtimes for existing movies in different cinemas/slots
 INSERT INTO SHOWTIME (movie_id, hall_no, cinema_id, slot, date) VALUES
 (1, 1, 2, 'Evening', '2026-04-26'), -- Inception in Maadi
 (3, 1, 1, 'Night', '2026-04-26'),   -- Interstellar in Nasr City
 (1, 1, 3, 'Night', '2026-04-27');   -- Inception in Heliopolis
 
--- -------------------------------------------------------
--- 3. ADDING MULTIPLE BOOKINGS FOR THE SAME CUSTOMERS (To test TOP 3 & HAVING > 500)
--- -------------------------------------------------------
+
 -- Noreen (ID 5) making 3 bookings to become a "Top Customer"
 INSERT INTO BOOKING (customer_id, booking_date, booking_status) VALUES
 (5, '2026-04-23', 'confirmed'),
@@ -130,29 +123,19 @@ INSERT INTO BOOKING (customer_id, booking_date, booking_status) VALUES
 INSERT INTO BOOKING (customer_id, booking_date, booking_status) VALUES
 (2, '2026-04-23', 'confirmed');
 
--- -------------------------------------------------------
--- 4. ADDING HIGH-VALUE PAYMENTS (To test HAVING SUM > 500)
--- -------------------------------------------------------
 -- Payments for Noreen's bookings (IDs 5, 6, 7)
 INSERT INTO PAYMENT (booking_id, payment_method, payment_date, amount, payment_status) VALUES
 (5, 'Credit Card', '2026-04-23', 250, 'completed'),
 (6, 'Credit Card', '2026-04-24', 300, 'completed'),
 (7, 'Credit Card', '2026-04-25', 150, 'completed'); -- Total for Noreen = 700
 
--- -------------------------------------------------------
--- 5. ADDING TICKETS & RESERVATIONS (To link everything for Section 9 & 11)
--- -------------------------------------------------------
--- Link Noreen's bookings to tickets
+
 INSERT INTO TICKET (booking_id) VALUES (5), (6), (7);
 
--- Reservations to generate Revenue per Cinema (Section 11.2)
--- Using different showtimes (Showtime IDs 5, 6, 7 from step 2)
 INSERT INTO RESERVATION (ticket_id, seat_no, showtime_id, hall_no, cinema_id, price) VALUES
 (5, 1, 5, 1, 2, 250), -- Reservation in Cinema Two
 (6, 1, 6, 1, 1, 300), -- Reservation in Cinema One
 (7, 2, 7, 1, 3, 150); -- Reservation in Cinema Three
-
-----INTO GENRES
 INSERT INTO MOVIE_GENRE VALUES
 (5,'Comedy');
 
